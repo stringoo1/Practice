@@ -58,7 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\BaseAccessor.cs" />
+    <Compile Include="Database\AccessorBase.cs" />
+    <Compile Include="Database\ProductAccessor.cs" />
+    <Compile Include="Entity\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,5 +88,6 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

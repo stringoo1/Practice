@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using StoreSystem.Database;
+using StoreSystem.Entity;
 
 namespace StoreSystem
 {
@@ -11,30 +13,41 @@ namespace StoreSystem
     {
         static void Main(string[] args)
         {
-            TestDBConnection();
+            DBC01();
+            DBC02();
+            DBC01();
 
             Console.ReadKey();
         }
 
-        private static void TestDBConnection()
+        private static void DBC01()
         {
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user01\source\repos\Practice\StoreSystem\Database1.mdf;Integrated Security=True";
-
-            string sql = "select * from Product";
-            using (var con = new SqlConnection(connectionString))
+            List<Product> products;
+            using (var accessor = new ProductAccessor())
             {
-                con.Open();
-                using (var cmd = new SqlCommand(sql, con))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine($"{reader["Id"]}, {reader["Name"]}, {reader["Price"]}");
-                        }
-                    }
-                }
+                products = accessor.SelectProducts();
+            }
+
+            products.ForEach(a => Console.WriteLine($"{a.ID}, {a.Name}, {a.Price}"));
+            Console.WriteLine("-----");
+        }
+
+        private static void DBC02()
+        {
+            int recordCount;
+
+            using (var accessor = new ProductAccessor())
+            {
+                recordCount = accessor.SelectProducts().Count;
+            }
+
+            recordCount++;
+
+            using (var accessor = new ProductAccessor())
+            {
+                accessor.InsertProducts(new Product(recordCount, "test" + recordCount, recordCount * 13));
             }
         }
+        
     }
 }
