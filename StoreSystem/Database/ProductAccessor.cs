@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using StoreSystem.Entity;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace StoreSystem.Database
 {
     public class ProductAccessor : AccessorBase
     {
-        public int SelectCountProducts()
+        // レコード全件を対象に、ID値の最大を求める
+        public int GetMaxProductId()
         {
-            return SelectProducts().Count;
+            return SelectProducts().Select(elm => elm.ID).Max();
         }
 
+        // レコード全件を取得する
         public List<Product> SelectProducts()
         {
             string sqlQuery = @"select * from Product";
@@ -29,7 +32,8 @@ namespace StoreSystem.Database
                 );
         }
 
-        public void InsertProducts(Product product)
+        // レコードを挿入する
+        public void InsertProduct(string name, int price)
         {
             string sqlQuery = @"
 insert into Product(
@@ -38,9 +42,11 @@ values(
     @Id, @Name, @Price)
 ";
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Id", product.ID));
-            parameters.Add(new SqlParameter("@Name", product.Name));
-            parameters.Add(new SqlParameter("@Price", product.Price));
+            int id = SelectCountProducts() + 1;
+
+            parameters.Add(new SqlParameter("@Id", id));
+            parameters.Add(new SqlParameter("@Name", name));
+            parameters.Add(new SqlParameter("@Price", price));
 
             this.ExecuteNonQuery(
                 sqlQuery,
