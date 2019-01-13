@@ -2,6 +2,7 @@
 using StoreSystem.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System;
 
 namespace StoreSystem.Database
 {
@@ -42,7 +43,7 @@ values(
     @Id, @Name, @Price)
 ";
             List<SqlParameter> parameters = new List<SqlParameter>();
-            int id = SelectCountProducts() + 1;
+            int id = GetMaxProductId() + 1;
 
             parameters.Add(new SqlParameter("@Id", id));
             parameters.Add(new SqlParameter("@Name", name));
@@ -53,6 +54,5 @@ values(
                 parameters
                 );
         }
-
     }
 }
