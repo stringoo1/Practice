@@ -6,6 +6,11 @@ namespace StoreSystem.Database
 {
     public class ProductAccessor : AccessorBase
     {
+        public int SelectCountProducts()
+        {
+            return SelectProducts().Count;
+        }
+
         public List<Product> SelectProducts()
         {
             string sqlQuery = @"select * from Product";
