@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\CommandBase.cs" />
+    <Compile Include="Command\CommandExitSystem.cs" />
     <Compile Include="Command\CommandParser.cs" />
     <Compile Include="Command\CommandSelectProducts.cs" />
     <Compile Include="Database\AccessorBase.cs" />

@@ -27,16 +27,21 @@ namespace StoreSystem.Command
         // コマンドのインスタンスを作成する
         private CommandBase CreateInstance(string commandName)
         {
-            if (string.Compare(commandName, CommandSelectProducts.Name, ignoreCase:true) == 0)
+            if (IsEqualCommandName(commandName, CommandSelectProducts.Name))
             {
                 return new CommandSelectProducts();
             }
-            else
+            else if (IsEqualCommandName(commandName, CommandExitSystem.Name))
             {
-                // tmp
-                return new CommandSelectProducts();
+                return new CommandExitSystem();
             }
             throw new ArgumentException("");
+        }
+
+        // 大文字小文字区別なく文字列を比較する
+        private bool IsEqualCommandName(string inputString, string commandName)
+        {
+            return string.Compare(inputString, commandName, ignoreCase: true) == 0;
         }
 
     }
