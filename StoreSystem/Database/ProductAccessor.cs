@@ -27,8 +27,9 @@ namespace StoreSystem.Database
                     int id = (int)reader.GetFieldValue<int>(reader.GetOrdinal("Id"));
                     string name = reader.GetFieldValue<string>(reader.GetOrdinal("Name")).TrimEnd();
                     int price = (int)reader.GetFieldValue<int>(reader.GetOrdinal("Price"));
+                    int volume = (int)reader.GetFieldValue<int>(reader.GetOrdinal("Volume"));
 
-                    return new Product(id, name, price);
+                    return new Product(id, name, price, volume);
                 }
                 );
         }

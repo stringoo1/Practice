@@ -11,12 +11,14 @@ namespace StoreSystem.Entity
         public int ID { get; private set; }
         public string Name { get; private set; }
         public int Price { get; private set; }
+        public int Volume { get; private set; }
 
-        public Product(int id, string name, int price)
+        public Product(int id, string name, int price, int volume)
         {
             this.ID = id;
             this.Name = name;
             this.Price = price;
+            this.Volume = volume;
         }
     }
 }
