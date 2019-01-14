@@ -65,6 +65,7 @@
     <Compile Include="Database\AccessorBase.cs" />
     <Compile Include="Database\ProductAccessor.cs" />
     <Compile Include="Database\StockAccessor.cs" />
+    <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Entity\Stock.cs" />
     <Compile Include="Program.cs" />
